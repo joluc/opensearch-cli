@@ -28,6 +28,7 @@ import (
 	"opensearch-cli/entity/platform"
 	"opensearch-cli/environment"
 	"opensearch-cli/gateway/aws/signer"
+	"opensearch-cli/gateway/oidc"
 	"os"
 	"strconv"
 	"time"
@@ -145,10 +146,16 @@ func (g *HTTPGateway) isValidResponse(response *http.Response) error {
 // Execute calls request using http and check if status code is ok or not
 func (g *HTTPGateway) Execute(req *retryablehttp.Request) ([]byte, error) {
 	if g.Profile.AWS != nil {
-		//sign request
 		if err := signer.SignRequest(req, *g.Profile.AWS, signer.GetV4Signer); err != nil {
 			return nil, err
 		}
+	}
+	if g.Profile.OIDC != nil {
+		token, err := oidc.GetToken(*g.Profile.OIDC)
+		if err != nil {
+			return nil, fmt.Errorf("oidc token: %w", err)
+		}
+		req.Header.Set("Authorization", "Bearer "+token)
 	}
 	response, err := g.Client.HTTPClient.Do(req)
 	if err != nil {
@@ -177,7 +184,7 @@ func (g *HTTPGateway) Call(req *retryablehttp.Request, statusCode int) ([]byte, 
 		return nil, err
 	}
 	if r.StatusCode() != statusCode {
-		return nil, fmt.Errorf(r.GetResponse())
+		return nil, fmt.Errorf("%s", r.GetResponse())
 	}
 	return nil, err
 

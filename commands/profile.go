@@ -98,6 +98,8 @@ var createProfileCmd = &cobra.Command{
 			getAWSIAMAuthDetails(&newProfile)
 		case "cert":
 			getCertificateAuthDetails(&newProfile)
+		case "oidc":
+			getOIDCAuthDetails(&newProfile)
 		default:
 			DisplayError(errors.New("invalid value for auth-type. Use --help -h command to see permitted values"), CreateNewProfileCommandName)
 			return
@@ -174,10 +176,11 @@ func init() {
 	_ = createProfileCmd.MarkFlagRequired(FlagProfileCreateName)
 	createProfileCmd.Flags().StringP(FlagProfileCreateEndpoint, "e", "", "Create profile with this endpoint or host")
 	_ = createProfileCmd.MarkFlagRequired(FlagProfileCreateEndpoint)
-	createProfileCmd.Flags().StringP(FlagProfileCreateAuthType, "a", "", "Authentication type. Options are disabled, basic, cert and aws-iam."+
+	createProfileCmd.Flags().StringP(FlagProfileCreateAuthType, "a", "", "Authentication type. Options are disabled, basic, cert, aws-iam and oidc."+
 		"\nIf security is disabled, provide --auth-type='disabled'.\nIf security uses HTTP basic authentication, provide --auth-type='basic'.\n"+
 		"If security uses client certificate authentication, provide --auth-type='cert'.\n"+
-		"If security uses AWS IAM ARNs as users, provide --auth-type='aws-iam'.\nopensearch-cli asks for additional information based on your choice of authentication type.")
+		"If security uses AWS IAM ARNs as users, provide --auth-type='aws-iam'.\n"+
+		"If security uses OpenID Connect (device flow), provide --auth-type='oidc'.\nopensearch-cli asks for additional information based on your choice of authentication type.")
 	_ = createProfileCmd.MarkFlagRequired(FlagProfileCreateAuthType)
 	createProfileCmd.Flags().IntP(FlagProfileMaxRetry, "m", 3, "Maximum retry attempts allowed if transient problems occur.\n"+
 		"You can override this value by using the "+environment.OPENSEARCH_MAX_RETRY+" environment variable.")
@@ -240,6 +243,18 @@ func getAWSIAMAuthDetails(newProfile *entity.Profile) {
 	fmt.Printf("AWS service name where your cluster is deployed (for Amazon Elasticsearch Service, use 'es'. For EC2, use 'ec2'): ")
 	awsIAM.ServiceName = getUserInputAsText(checkInputIsNotEmpty)
 	newProfile.AWS = awsIAM
+}
+
+// getOIDCAuthDetails prompts for OIDC issuer URL, client ID, and optional client secret.
+func getOIDCAuthDetails(newProfile *entity.Profile) {
+	oidcCfg := &entity.OIDC{}
+	fmt.Printf("OIDC issuer URL (e.g. https://your-idp.example.com/realms/master): ")
+	oidcCfg.IssuerURL = getUserInputAsText(checkInputIsNotEmpty)
+	fmt.Printf("Client ID: ")
+	oidcCfg.ClientID = getUserInputAsText(checkInputIsNotEmpty)
+	fmt.Printf("Client secret (leave blank for public clients): ")
+	oidcCfg.ClientSecret = getUserInputAsText(nil)
+	newProfile.OIDC = oidcCfg
 }
 
 // getCertificateAuthDetails gets certificate and key paths profile information from user using command line

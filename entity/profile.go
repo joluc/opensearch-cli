@@ -16,6 +16,14 @@ type AWSIAM struct {
 	ServiceName string `yaml:"service"`
 }
 
+// OIDC holds configuration for OpenID Connect device flow authentication.
+type OIDC struct {
+	IssuerURL    string `yaml:"issuer_url"`
+	ClientID     string `yaml:"client_id"`
+	ClientSecret string `yaml:"client_secret,omitempty"`
+	Scopes       []string `yaml:"scopes,omitempty"`
+}
+
 //Trust contains file path for certificate and private key locations
 type Trust struct {
 	CAFilePath                *string
@@ -29,6 +37,7 @@ type Profile struct {
 	UserName    string  `yaml:"user,omitempty"`
 	Password    string  `yaml:"password,omitempty"`
 	AWS         *AWSIAM `yaml:"aws_iam,omitempty"`
+	OIDC        *OIDC   `yaml:"oidc,omitempty"`
 	Certificate *Trust  `yaml:"certificate,omitempty"`
 	MaxRetry    *int    `yaml:"max_retry,omitempty"`
 	Timeout     *int64  `yaml:"timeout,omitempty"`
