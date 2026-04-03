@@ -18,7 +18,7 @@ import (
 	entity "opensearch-cli/entity/knn"
 	"testing"
 
-	"github.com/golang/mock/gomock"
+	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 

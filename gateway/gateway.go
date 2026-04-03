@@ -177,7 +177,7 @@ func (g *HTTPGateway) Call(req *retryablehttp.Request, statusCode int) ([]byte, 
 		return nil, err
 	}
 	if r.StatusCode() != statusCode {
-		return nil, fmt.Errorf(r.GetResponse())
+		return nil, fmt.Errorf("%s", r.GetResponse())
 	}
 	return nil, err
 

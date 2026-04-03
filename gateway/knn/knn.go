@@ -31,7 +31,7 @@ const (
 	warmupIndicesURLTemplate = baseURL + "/warmup/%s"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen  -destination=mocks/mock_knn.go -package=mocks . Gateway
+//go:generate go run -mod=mod go.uber.org/mock/mockgen  -destination=mocks/mock_knn.go -package=mocks . Gateway
 
 // Gateway interface to k-NN Plugin
 type Gateway interface {

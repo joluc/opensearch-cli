@@ -24,7 +24,7 @@ const (
 	DefaultProfileName = "default"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen -destination=mocks/mock_profile.go -package=mocks . Controller
+//go:generate go run -mod=mod go.uber.org/mock/mockgen -destination=mocks/mock_profile.go -package=mocks . Controller
 type Controller interface {
 	CreateProfile(profile entity.Profile) error
 	DeleteProfiles(names []string) error

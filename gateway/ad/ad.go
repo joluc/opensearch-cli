@@ -32,7 +32,7 @@ const (
 	updateURLTemplate = baseURL + "/%s"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen  -destination=mocks/mock_ad.go -package=mocks . Gateway
+//go:generate go run -mod=mod go.uber.org/mock/mockgen  -destination=mocks/mock_ad.go -package=mocks . Gateway
 
 // Gateway interface to AD Plugin
 type Gateway interface {

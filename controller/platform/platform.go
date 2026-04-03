@@ -21,7 +21,7 @@ import (
 	"fmt"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen  -destination=mocks/mock_platform.go -package=mocks . Controller
+//go:generate go run -mod=mod go.uber.org/mock/mockgen  -destination=mocks/mock_platform.go -package=mocks . Controller
 
 //Controller is an interface for OpenSearch
 type Controller interface {

@@ -28,7 +28,7 @@ import (
 	"github.com/cheggaaa/pb/v3"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen -destination=mocks/mock_ad.go -package=mocks . Controller
+//go:generate go run -mod=mod go.uber.org/mock/mockgen -destination=mocks/mock_ad.go -package=mocks . Controller
 
 //Controller is an interface for the AD plugin controllers
 type Controller interface {

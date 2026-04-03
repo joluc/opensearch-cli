@@ -19,7 +19,7 @@ import (
 	gateway "opensearch-cli/gateway/knn/mocks"
 	"testing"
 
-	"github.com/golang/mock/gomock"
+	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 

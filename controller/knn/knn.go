@@ -19,7 +19,7 @@ import (
 	"strings"
 )
 
-//go:generate go run -mod=mod github.com/golang/mock/mockgen  -destination=mocks/mock_knn.go -package=mocks . Controller
+//go:generate go run -mod=mod go.uber.org/mock/mockgen  -destination=mocks/mock_knn.go -package=mocks . Controller
 
 //Controller is an interface for the k-NN plugin controllers
 type Controller interface {

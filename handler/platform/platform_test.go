@@ -18,7 +18,7 @@ import (
 	entity "opensearch-cli/entity/platform"
 	"testing"
 
-	"github.com/golang/mock/gomock"
+	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 
