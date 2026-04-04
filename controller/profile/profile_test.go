@@ -19,8 +19,8 @@ import (
 	"os"
 	"testing"
 
-	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/mock/gomock"
 )
 
 func getDefaultConfig() entity.Config {

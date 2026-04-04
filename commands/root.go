@@ -94,8 +94,8 @@ func GetConfigFilePath(configFlagValue string) (string, error) {
 	return GetDefaultConfigFilePath(), nil
 }
 
-//isExists check if given path exists or not
-//if path is just a name, it will check in current directory
+// isExists check if given path exists or not
+// if path is just a name, it will check in current directory
 func isExists(path string) bool {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		return false

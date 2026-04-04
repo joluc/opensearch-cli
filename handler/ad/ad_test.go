@@ -20,8 +20,8 @@ import (
 	"opensearch-cli/mapper"
 	"testing"
 
-	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/mock/gomock"
 )
 
 func getRawFilter() []byte {

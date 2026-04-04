@@ -25,8 +25,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"go.uber.org/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/mock/gomock"
 )
 
 const mockDetectorID = "m4ccEnIBTXsGi3mvMt9p"
