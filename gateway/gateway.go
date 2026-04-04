@@ -218,13 +218,13 @@ func (g *HTTPGateway) BuildCurlRequest(ctx context.Context, method string, paylo
 // BuildCurlMultipartFormRequest builds multipart file-upload request based on method and add payload (in byte)
 func (g *HTTPGateway) BuildCurlMultipartFormRequest(ctx context.Context, method string, filePath string, url string, headers map[string]string) (*retryablehttp.Request, error) {
 	file, _ := os.Open(filePath)
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 	part, _ := writer.CreateFormFile("file", filePath)
 	_, _ = io.Copy(part, file)
-	writer.Close()
+	_ = writer.Close()
 
 	r, err := retryablehttp.NewRequest(method, url, body)
 

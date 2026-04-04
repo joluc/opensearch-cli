@@ -73,14 +73,14 @@ func createTempConfigFile(testFilePath string) (*os.File, error) {
 		return nil, err
 	}
 	if _, err := tmpfile.Write(content); err != nil {
-		os.Remove(tmpfile.Name()) // clean up
+		_ = os.Remove(tmpfile.Name()) // clean up
 		return nil, err
 	}
 	if runtime.GOOS == "windows" {
 		return tmpfile, nil
 	}
 	if err := tmpfile.Chmod(0600); err != nil {
-		os.Remove(tmpfile.Name()) // clean up
+		_ = os.Remove(tmpfile.Name()) // clean up
 		return nil, err
 	}
 	return tmpfile, nil
@@ -101,7 +101,7 @@ func TestGetProfile(t *testing.T) {
 		assert.NoError(t, err)
 		expectedProfile := entity.Profile{Name: "default", Endpoint: "http://localhost:9200", UserName: "default", Password: "admin"}
 		assert.EqualValues(t, expectedProfile, *actual)
-		os.Remove(profileFile.Name())
+		_ = os.Remove(profileFile.Name())
 	})
 	t.Run("test get profile", func(t *testing.T) {
 		root := GetRoot()
