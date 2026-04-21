@@ -17,8 +17,8 @@ import (
 	"opensearch-cli/entity"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws/credentials" //nolint:staticcheck // TODO: migrate to aws-sdk-go-v2
-	"github.com/aws/aws-sdk-go/aws/session"     //nolint:staticcheck // TODO: migrate to aws-sdk-go-v2
+	"github.com/aws/aws-sdk-go/aws/credentials"  //nolint:staticcheck // TODO: migrate to aws-sdk-go-v2
+	"github.com/aws/aws-sdk-go/aws/session"      //nolint:staticcheck // TODO: migrate to aws-sdk-go-v2
 	v4 "github.com/aws/aws-sdk-go/aws/signer/v4" //nolint:staticcheck // TODO: migrate to aws-sdk-go-v2
 	"github.com/hashicorp/go-retryablehttp"
 )
