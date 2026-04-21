@@ -5,7 +5,7 @@ INTEGRATION_TEST_PATH=./it/...
 ENV_LOCAL_TEST=\
   OPENSEARCH_ENDPOINT="https://localhost:9200" \
   OPENSEARCH_USER="admin" \
-  OPENSEARCH_PASSWORD="admin"
+  OPENSEARCH_PASSWORD="MyStr0ngP@ssw0rd!"
 
 # this command will start a docker components that we set in docker-compose.yml
 docker.start.components:
