@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Docker Image
         env:
-          OPENSEARCH_VERSION: ${{ matrix.opensearch-version }}
+          OPENSEARCH_VERSION: ${{ matrix.entry.opensearch_version }}
         run: |
           make docker.start.components
           sleep 60

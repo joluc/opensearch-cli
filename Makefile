@@ -9,11 +9,11 @@ ENV_LOCAL_TEST=\
 
 # this command will start a docker components that we set in docker-compose.yml
 docker.start.components:
-	docker-compose up -d;
+	docker compose up -d;
 
 # shutting down docker components
 docker.stop:
-	docker-compose down;
+	docker compose down;
 
 # clean up docker
 docker.clean:
